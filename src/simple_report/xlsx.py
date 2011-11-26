@@ -18,6 +18,7 @@ class XLSXWrapper(object):
     def __init__(self, ffile):
         assert isinstance(ffile, FileProxy)       
         
+        # Распаковываем xlsx архив во временную папку
         self.extract_folder = os.path.join( gettempdir(), 
                     '_'.join([str(uuid.uuid4())[:8], ffile.get_file_name()]))
         

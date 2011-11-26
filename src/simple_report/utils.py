@@ -68,6 +68,12 @@ class FileConverter(object):
         self.file = ffile
     
     def build(self, to_format):
+        u"""
+        Метод должен исходя из исходного типа документа и требуемого типа
+        найти метод у себя и вызвать его. Если этого метода нет. Должно 
+        генериться исключение. 
+        """
+        
         # Заглушка для конвертера
         return self.file.get_path()
 
@@ -84,8 +90,7 @@ class FileProxy(object):
     def __init__(self, file_like_object, new_file=False):
         self.is_file_like_object = False
         if hasattr(file_like_object, 'read'):
-            raise FileException("File like object temporarily not supported.")
-            #self.is_file = True
+            raise FileException("File like object temporarily not supported.")            
         
         if not os.path.exists(file_like_object) and not new_file:
             raise FileException('File "%s" not found.' % file_like_object)

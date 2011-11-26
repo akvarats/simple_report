@@ -80,6 +80,6 @@ class SpreadsheetReport(Report, ISpreadsheetReport):
         u"""
         Генерирует выходной файл в нужном формате
         """
-        proxy_file = FileProxy(dst_file_path, new_file=True)
-        self.report.pack(proxy_file)
-        return FileConverter(proxy_file).build(file_type)
+        ffile = FileProxy(dst_file_path, new_file=True)
+        self.report.pack(ffile)
+        return FileConverter(ffile).build(file_type)
