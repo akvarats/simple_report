@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sst count="11" uniqueCount="11" xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><si><t>Добро пожаловать #user#</t></si><si><t>Сегодня: #date_now#</t></si><si><t>Номер</t></si><si><t>ФИО</t></si><si><t>Участок</t></si><si><t>Просто тупо текст</t></si><si><t>Т</t></si><si><t>#nbr#</t></si><si><t>#fio#</t></si><si><t>#sector#</t></si><si><t>Подпись уполномоченного сотрудника: #user#</t></si></sst>
