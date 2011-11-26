@@ -10,10 +10,11 @@ import abc
 from interface import ISpreadsheetSection, ISpreadsheetReport,\
     IDocumentReport
 from utils import FileProxy, FileConverter
+from xlsx import XLSXWrapper
     
                 
 class Report(object):
-    """
+    u"""
     Абстрактный класс отчета
     """
     
@@ -29,14 +30,14 @@ class DocumentReport(Report, IDocumentReport):
 
     DOCX = FileConverter.DOCX
 
-    def build(self, params, file_type=DOCX):
-        """
+    def build(self, dst_file_path, params, file_type=DOCX):
+        u"""
         Генерирует выходной файл в нужном формате
         """
     
     
 class SpreadsheetSection(ISpreadsheetSection):
-    """
+    u"""
     Объект - секция отчета
     """    
     
@@ -45,7 +46,7 @@ class SpreadsheetSection(ISpreadsheetSection):
         self._report = report
     
     def flush(self, params, oriented=ISpreadsheetSection.VERTICAL):
-        """
+        u"""
         Установка параметров в секции
         """
         
@@ -56,20 +57,29 @@ class SpreadsheetReport(Report, ISpreadsheetReport):
     
     def __init__(self, *args, **kwargs):
         super(SpreadsheetReport, self).__init__(*args, **kwargs)
+        
         xlsx_file = FileConverter(self.file).build(self.XLSX)
+        
+        self.report = XLSXWrapper( FileProxy(xlsx_file) )
     
     def get_sections(self):
-        """
+        u"""
         Возвращает все секции
         """
+        
+        return self.report.get_sections()
     
     def get_section(self, section_name):
-        """
+        u"""
         Возвращает секцию по имени
         """
+        self.report.get_section(section_name)
         
     
-    def build(self, file_type=XLSX):
-        """
+    def build(self, dst_file_path, file_type=XLSX):
+        u"""
         Генерирует выходной файл в нужном формате
         """
+        proxy_file = FileProxy(dst_file_path, new_file=True)
+        self.report.pack(proxy_file)
+        return FileConverter(proxy_file).build(file_type)

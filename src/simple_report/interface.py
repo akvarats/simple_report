@@ -23,9 +23,15 @@ class IDocumentReport(IReport):
     __meta__ = ABCMeta
     
     @abstractmethod
-    def build(self, params, file_type):
-        """
+    def build(self, dst_file_path, params, file_type):
+        u"""
         Генерирует выходной файл в нужном формате
+        """
+        
+    @abstractmethod    
+    def get_all_parameters(self):
+        u"""
+        Возвращает все параметры документа
         """
     
     
@@ -34,19 +40,19 @@ class ISpreadsheetReport(IReport):
 
     @abstractmethod
     def get_sections(self):
-        """
+        u"""
         Возвращает все секции
         """
     
     @abstractmethod
     def get_section(self, section_name):
-        """
+        u"""
         Возвращает секцию по имени
         """
         
     @abstractmethod
-    def build(self, file_type):
-        """
+    def build(self, dst_file_path, file_type):
+        u"""
         Генерирует выходной файл в нужном формате
         """
         
@@ -62,3 +68,10 @@ class ISpreadsheetSection(object):
     @abstractmethod
     def flush(self, params, oriented=VERTICAL):
         pass
+    
+
+    @abstractmethod    
+    def get_all_parameters(self):
+        u"""
+        Возвращает все параметры секции
+        """

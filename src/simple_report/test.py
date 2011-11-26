@@ -18,8 +18,7 @@ class TestSpreadsheetReport(unittest.TestCase):
         self.dst_file_path = os.path.join(
                     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
                     'test_data', 'simple_test_result.xlsx')
-        
-        print self.dst_file_path
+                
 
     def test_report(self):        
         if os.path.exists(self.dst_file_path):
